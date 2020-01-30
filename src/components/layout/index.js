@@ -1,12 +1,14 @@
 import React from 'react'
 
 import Header from 'components/header'
+import Footer from 'components/footer'
 
 export default function Layout (props) {
     return (
         <React.Fragment>
             <Header />
-            <p>this is Layout</p>
+            {props.children}
+            <Footer />
         </React.Fragment>
     )
 }
