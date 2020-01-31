@@ -5,12 +5,13 @@ import {
 } from 'react-router-dom'
 
 import Layout from 'components/layout'
+import HomePage from 'components/home-page'
 
 export default (
     <Switch>
         <Route exact path = '/'>
             <Layout>
-                <p>home</p>
+                <HomePage />
             </Layout>
         </Route>
         <Route path= '/favourites'>

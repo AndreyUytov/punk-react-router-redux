@@ -1,8 +1,6 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
-import './style.scss'
-
 import Navigation from './navigation'
 
 export default function HeaderPage (props) {

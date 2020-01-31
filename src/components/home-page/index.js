@@ -1,11 +1,13 @@
 import React from 'react'
 
+import Search from './search'
+import ProductBlock from './product-block'
+
 export default function HomePage (props) {
     return (
         <React.Fragment>
-            <div className = 'search-block'>
-                <
-            </div>
+            <Search />
+            <ProductBlock />
         </React.Fragment>
     )
 }
