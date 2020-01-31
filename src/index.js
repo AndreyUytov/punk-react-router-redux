@@ -1,6 +1,5 @@
-import './index.html'
-
 import './styles/style.scss'
+import './index.html'
 
 import React from 'react'
 import ReactDOM from 'react-dom'

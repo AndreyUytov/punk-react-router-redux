@@ -7,7 +7,9 @@ export default function Layout (props) {
     return (
         <React.Fragment>
             <Header />
-            {props.children}
+            <main className='main-page conteiner'>
+                {props.children}
+            </main>
             <Footer />
         </React.Fragment>
     )

@@ -1,13 +1,15 @@
 import React from 'react'
 import {NavLink} from 'react-router-dom'
 
+import './style.scss'
+
 export default function Footer (props) {
     return (
         <React.Fragment>
-            <footer className='footer-page'>
+            <footer className='footer-page conteiner'>
                 <ul className='footer-page__list'>
                     <li>
-                        <NavLink to='/' className='footer-page__item-link'
+                        <NavLink exact to='/' className='footer-page__item-link'
                          activeClassName='footer-page__item-link--active'>
                             Home-Page
                         </NavLink>

@@ -1,8 +1,7 @@
 import React from 'react'
 import {
     Switch,
-    Route,
-    Redirect
+    Route
 } from 'react-router-dom'
 
 import Layout from 'components/layout'
