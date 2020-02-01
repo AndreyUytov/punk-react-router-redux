@@ -6,12 +6,6 @@ import React, {
 } from 'react'
 import {NavLink} from 'react-router-dom'
 
-const useDataApi = (initialPage, initialData) => {
-    const [page, setPage] = useState(initialPage);
-
-    const [state, dispatch] = useReducer()
-}
-
 export default function ProductBlock (props) {
     return (
         <ul className='product-list'>

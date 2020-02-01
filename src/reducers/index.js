@@ -8,10 +8,15 @@ import {
     SET_PAGE
 } from 'actionsTypes'
 
-function reducer (initialstate = 'state') {
-    return initialstate
+function pageReducer (state = 1, {type, payload}) {
+    switch (type) {
+        case SET_PAGE:
+            return payload.day
+        default:
+            return state
+    }
 }
 
 export default (combineReducers({
-    reducer
+    pageReducer
 }))
