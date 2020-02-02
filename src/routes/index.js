@@ -1,7 +1,8 @@
 import React from 'react'
 import {
     Switch,
-    Route
+    Route,
+    Redirect
 } from 'react-router-dom'
 
 import Layout from 'components/layout'
@@ -9,11 +10,6 @@ import HomePage from 'components/home-page'
 
 export default (
     <Switch>
-        <Route exact path = '/'>
-            <Layout>
-                <HomePage />
-            </Layout>
-        </Route>
         <Route path= '/favourites'>
             <Layout>
                 <p>favourites</p>
@@ -22,6 +18,14 @@ export default (
         <Route path= '/basket'>
             <Layout>
                 <p>basket</p>
+            </Layout>
+        </Route>
+        <Route exact path = '/'>
+            <Redirect to = '/1' />
+        </Route>
+        <Route path = '/:page'>
+            <Layout>
+                <HomePage />
             </Layout>
         </Route>
     </Switch>

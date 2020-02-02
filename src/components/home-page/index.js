@@ -1,15 +1,24 @@
 import React from 'react'
+import { connect } from 'react-redux'
 
 import Search from './search'
 import ProductBlock from './product-block'
 import Pagination from './pagination'
 
-export default function HomePage (props) {
+function HomePage (props) {
     return (
         <React.Fragment>
             <Search />
             <ProductBlock />
-            <Pagination currentPage = {4}/>
+            <Pagination {...props}/>
         </React.Fragment>
     )
 }
+
+const mapStateToProps = (store) => {
+    return {
+        page: store.homePage
+    } 
+ }
+
+export default connect (mapStateToProps)(HomePage)

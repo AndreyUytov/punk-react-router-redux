@@ -1,16 +1,23 @@
 import React from 'react'
+import {connect} from 'react-redux'
 
 import Header from 'components/header'
 import Footer from 'components/footer'
 
-export default function Layout (props) {
+function Layout (props) {
     return (
         <React.Fragment>
-            <Header />
+            <Header {...props}/>
             <main className='main-page conteiner'>
                 {props.children}
             </main>
-            <Footer />
+            <Footer {...props}/>
         </React.Fragment>
     )
 }
+
+const mapStateToProps = (store) => {
+    return store  
+ }
+
+export default connect(mapStateToProps)(Layout)

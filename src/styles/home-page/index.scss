@@ -32,3 +32,29 @@
 
     list-style: none;
 }
+
+.pagination-list {
+    @include ul-reset;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-list__item {
+    width: 25px;
+    height: 25px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: black;
+
+    &:hover {
+        transform: scale(1.2);
+    }
+    &--active {
+        background-color: darkcyan;
+    }
+}

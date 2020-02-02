@@ -8,15 +8,20 @@ import {
     SET_PAGE
 } from 'actionsTypes'
 
-function pageReducer (state = 1, {type, payload}) {
+function homePage (state = 1, {type, payload}) {
     switch (type) {
         case SET_PAGE:
-            return payload.day
+            return payload
         default:
             return state
     }
 }
 
+function favourites (state = 'love items', {type, payload}) {
+    return state
+}
+
 export default (combineReducers({
-    pageReducer
+    homePage,
+    favourites
 }))
