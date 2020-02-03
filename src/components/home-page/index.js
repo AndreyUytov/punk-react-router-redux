@@ -17,7 +17,7 @@ function HomePage (props) {
 
 const mapStateToProps = (store) => {
     return {
-        page: store.homePage
+        page: store.page
     } 
  }
 

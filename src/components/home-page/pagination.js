@@ -2,9 +2,7 @@ import React, {
     useState,
     useReducer
 } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
-
-import rootreducer from 'reducers'
+import { NavLink } from 'react-router-dom'
 
 function generetePages (currentPage) {
     if(currentPage === 1) {
@@ -40,7 +38,7 @@ function renderPages (pageNumbers, dispatch) {
             <li key = {elem}>
                 <NavLink to={'/' + elem} className='pagination-list__item'
                 activeClassName="pagination-list__item--active"
-                onClick = {() => {dispatch({type: 'SET_PAGE', payload: elem})}}
+                onClick = {() => {dispatch({type: 'SET_PAGE', payload: {page: elem}})}}
                 >
                     {elem}  
                 </NavLink>
@@ -53,7 +51,6 @@ export default function Pagination (props) {
     let pagesNumbers = generetePages(props.page)
     const [pages, setPages] = useState(pagesNumbers)
 
-    let {page} = useParams()
     let {dispatch} = props
 
     return (
