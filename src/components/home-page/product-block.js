@@ -1,12 +1,20 @@
 import React, {
-    usestate,
-    useEffect,
-    useReducer,
-    useState
+    useEffect
 } from 'react'
 import {NavLink} from 'react-router-dom'
 
+import {fetchBeersAction} from 'actions'
+
 export default function ProductBlock (props) {
+
+    let {dispatch, page, beers} = props
+    console.log(page)
+
+    useEffect(() => {
+        fetchBeersAction(dispatch, page)
+        console.log(page, beers)
+    },[page])
+
     return (
         <ul className='product-list'>
             <li className='product-list__item item-card'>
@@ -15,7 +23,7 @@ export default function ProductBlock (props) {
                     title = 'изображение товара' 
                 />
                 <NavLink to='/id' className='item-card__title-link'>
-                    Name the product
+                    Name the product 
                 </NavLink>
                 <p className='item-card__description'>
                     Описание товара в кратце

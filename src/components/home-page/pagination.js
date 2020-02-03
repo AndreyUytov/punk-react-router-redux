@@ -1,6 +1,5 @@
 import React, {
-    useState,
-    useReducer
+    useState
 } from 'react'
 import { NavLink } from 'react-router-dom'
 

@@ -9,7 +9,7 @@ function HomePage (props) {
     return (
         <React.Fragment>
             <Search />
-            <ProductBlock />
+            <ProductBlock {...props}/>
             <Pagination {...props}/>
         </React.Fragment>
     )
@@ -17,7 +17,8 @@ function HomePage (props) {
 
 const mapStateToProps = (store) => {
     return {
-        page: store.page
+        page: store.page,
+        beers: store.beers
     } 
  }
 

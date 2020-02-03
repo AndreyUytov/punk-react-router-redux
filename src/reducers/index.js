@@ -5,7 +5,10 @@ import {
     ADD_TO_BASKET,
     REMOVE_FROM_BASKET,
     REMOVE_FROM_FAVOURITES,
-    SET_PAGE
+    SET_PAGE,
+    FETCH_BEERS_INIT,
+    FETCH_BEERS_SUCCESS,
+    FETCH_BEERS_FAILURE
 } from 'actionsTypes'
 import {indexById} from 'selectors.js'
 
@@ -18,20 +21,29 @@ function page (state = 1, {type, payload}) {
     }
 }
 
-function beers (state={}, {type, payload}) {
-    return {...state, ...indexById(payload.beers)}
+function beers (state=[], {type, payload}) {
+    switch (type) {
+        case FETCH_BEERS_SUCCESS:
+            return [...state, ...payload.beers]
+        default:
+            return state
+    }
 }
 
 function beersByPage (state = {}, {type, payload}) {
     switch (type) {
-        case ADD_TO_FAVOURITES:
-        case ADD_TO_BASKET:
-        case REMOVE_FROM_BASKET:
-        case REMOVE_FROM_FAVOURITES:
         case SET_PAGE:
+        case FETCH_BEERS_INIT:
             return {...state,
-                [payload.page] : {...beers(state[payload.page], {type, payload})}
-
+                [payload.page] : {isLoading: true, isError: false}
+            }
+        case FETCH_BEERS_SUCCESS:
+            return {...state,
+                [payload.page] : {...beers(state[payload.page], {type, payload}), isLoading: false, isError: false}
+            }
+        case FETCH_BEERS_FAILURE:
+            return {...state,
+            [payload.page] : {isLoading: false, isError: payload.error}
             }
         default: 
             return state
@@ -44,5 +56,6 @@ function favourites (state = 'love items', {type, payload}) {
 
 export default (combineReducers({
     page,
+    beers,
     favourites
 }))
