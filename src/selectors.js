@@ -2,8 +2,9 @@ export const getBeersById = (state, id) => {
     return state.beers[id]
   }
   
-  export const getBeers = state => {
-    return state.beersByPage.map((id) => {
+  export const getBeers = (state, page) => {
+    console.log(page, state)
+    return state.beersByPage[page.beers].map((id) => {
       return getBeersById(state, id)
     })
   }

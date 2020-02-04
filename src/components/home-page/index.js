@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Search from './search'
 import ProductBlock from './product-block'
 import Pagination from './pagination'
+import {getBeers} from 'selectors'
 
 function HomePage (props) {
     return (
@@ -18,7 +19,7 @@ function HomePage (props) {
 const mapStateToProps = (store) => {
     return {
         page: store.page,
-        beers: store.beers
+        beers: getBeers(store, store.page)
     } 
  }
 
