@@ -11,23 +11,26 @@ import {
     FETCH_BEERS_FAILURE
 } from 'actionsTypes'
 
-export const fetchBeersAction = () => async (dispatch, page) => {
-    dispatch({type: FETCH_BEERS_INIT})
+export const fetchBeersAction = async (dispatch, page) => {
+    dispatch({type: FETCH_BEERS_INIT, payload: {page: page}})
 
     try {
-        const {beers} = await request.get(
-            `https://api.punkapi.com/v2/beers?page=${page}&per_page=9`
+        const {body} = await request.get(
+            `https://api.punkapi.com/v2/beers?page=${page}&per_page=3`
         )
-        console.log(beers)
         dispatch({
             type: FETCH_BEERS_SUCCESS,
-            payload: {beers}
+            payload: {
+                beers: body,
+                page: page
+            }
         })
     } catch (error) {
         dispatch({
             type: FETCH_BEERS_FAILURE,
             payload: error,
-            error: true
+            error: true,
+            page: page
         })
     }
 }

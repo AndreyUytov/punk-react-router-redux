@@ -8,11 +8,9 @@ import {fetchBeersAction} from 'actions'
 export default function ProductBlock (props) {
 
     let {dispatch, page, beers} = props
-    console.log(page)
 
     useEffect(() => {
         fetchBeersAction(dispatch, page)
-        console.log(page, beers)
     },[page])
 
     return (

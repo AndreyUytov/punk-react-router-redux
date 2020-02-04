@@ -21,10 +21,10 @@ function page (state = 1, {type, payload}) {
     }
 }
 
-function beers (state=[], {type, payload}) {
+function beers (state = {}, {type, payload}) {
     switch (type) {
         case FETCH_BEERS_SUCCESS:
-            return [...state, ...payload.beers]
+            return {...state, ...indexById(payload.beers) }
         default:
             return state
     }
@@ -39,7 +39,8 @@ function beersByPage (state = {}, {type, payload}) {
             }
         case FETCH_BEERS_SUCCESS:
             return {...state,
-                [payload.page] : {...beers(state[payload.page], {type, payload}), isLoading: false, isError: false}
+                [payload.page] : { beers: [...payload.beers.map(i => i.id)], 
+                isLoading: false, isError: false}
             }
         case FETCH_BEERS_FAILURE:
             return {...state,
@@ -57,5 +58,6 @@ function favourites (state = 'love items', {type, payload}) {
 export default (combineReducers({
     page,
     beers,
+    beersByPage,
     favourites
 }))
