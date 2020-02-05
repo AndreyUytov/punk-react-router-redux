@@ -19,7 +19,9 @@ function HomePage (props) {
 const mapStateToProps = (store) => {
     return {
         page: store.page,
-        beers: getBeers(store, store.page)
+        beers: getBeers(store, store.page),
+        isLoading: store.beersByPage[store.page].isLoading,
+        isError: store.beersByPage[store.page].isError
     } 
  }
 

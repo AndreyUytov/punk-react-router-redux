@@ -16,7 +16,7 @@ export const fetchBeersAction = async (dispatch, page) => {
 
     try {
         const {body} = await request.get(
-            `https://api.punkapi.com/v2/beers?page=${page}&per_page=3`
+            `https://api.punkapi.com/v2/beers?page=${page}&per_page=6`
         )
         dispatch({
             type: FETCH_BEERS_SUCCESS,
