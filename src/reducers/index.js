@@ -30,17 +30,26 @@ function beers (state = {}, {type, payload}) {
     }
 }
 
-function beersByPage (state = {}, {type, payload}) {
+const initialState = {
+    1: {
+        beers:[],
+        isLoading: true,
+        isError: false
+    }
+}
+
+function beersByPage (state = initialState, {type, payload}) {
     switch (type) {
         case SET_PAGE:
         case FETCH_BEERS_INIT:
             return {...state,
-                [payload.page] : {isLoading: true, isError: false}
+                [payload.page] : {sLoading: true, isError: false, beers: []}
             }
         case FETCH_BEERS_SUCCESS:
             return {...state,
-                [payload.page] : { beers: [...payload.beers.map(i => i.id)], 
-                isLoading: false, isError: false}
+                [payload.page] : {
+                    beers: [...payload.beers.map(i => i.id)], 
+                    isLoading: false, isError: false}
             }
         case FETCH_BEERS_FAILURE:
             return {...state,
@@ -49,6 +58,7 @@ function beersByPage (state = {}, {type, payload}) {
         default: 
             return state
     }
+    
 }
 
 function favourites (state = 'love items', {type, payload}) {

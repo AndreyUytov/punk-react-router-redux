@@ -3,8 +3,7 @@ export const getBeersById = (state, id) => {
   }
   
   export const getBeers = (state, page) => {
-    console.log(page, state)
-    return state.beersByPage[page.beers].map((id) => {
+    return state.beersByPage[page].beers.map((id) => {
       return getBeersById(state, id)
     })
   }
