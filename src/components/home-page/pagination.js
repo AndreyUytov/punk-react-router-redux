@@ -1,7 +1,7 @@
 import React, {
-    useState
+    useState, useEffect
 } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 function generetePages (currentPage) {
     if(currentPage === 1) {
@@ -35,7 +35,7 @@ function renderPages (pageNumbers, dispatch) {
     return pageNumbers.map((elem) => {
         return (
             <li key = {elem}>
-                <NavLink to={'/' + elem} className='pagination-list__item'
+                <NavLink to={'/beers/' + elem} className='pagination-list__item'
                 activeClassName="pagination-list__item--active"
                 onClick = {() => {dispatch({type: 'SET_PAGE', payload: {page: elem}})}}
                 >
@@ -47,10 +47,16 @@ function renderPages (pageNumbers, dispatch) {
 }
 
 export default function Pagination (props) {
-    let pagesNumbers = generetePages(props.page)
-    const [pages, setPages] = useState(pagesNumbers)
+    let {dispatch, pageNumber} = props
+    let {page} = useParams()
+    useEffect(() => {
+        if(page !== toString(pageNumber)) {
+            dispatch({type:'SET_PAGE', payload:{page: +page}})
+        }
+    }, [page])
 
-    let {dispatch} = props
+    let pagesNumbers = generetePages(pageNumber)
+    const [pages, setPages] = useState(pagesNumbers)
 
     return (
         <React.Fragment>

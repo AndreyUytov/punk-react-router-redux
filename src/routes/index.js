@@ -21,9 +21,9 @@ export default (
             </Layout>
         </Route>
         <Route exact path = '/'>
-            <Redirect to = '/1' />
+            <Redirect to = '/beers/1' />
         </Route>
-        <Route path = '/:page'>
+        <Route path = '/beers/:page'>
             <Layout>
                 <HomePage />
             </Layout>

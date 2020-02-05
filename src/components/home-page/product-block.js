@@ -1,7 +1,7 @@
 import React, {
     useEffect
 } from 'react'
-import {Link} from 'react-router-dom'
+import {Link, useParams} from 'react-router-dom'
 
 import {fetchBeersAction} from 'actions'
 
@@ -13,7 +13,7 @@ function renderItems (beers) {
                     className="item-card__img"
                     alt="изображение товара"/>
                 <div className='wrapper-card'>
-                    <Link to={'/beers' + elem.id} className='item-card__title-link'>
+                    <Link to={'/beer' + elem.id} className='item-card__title-link'>
                         {elem.name}
                     </Link>
                     <p className='item-card__description'>
@@ -47,11 +47,18 @@ function generetListContent (beers, isLoading, isError) {
 
 export default function ProductBlock (props) {
 
-    let {dispatch, page, beers, isLoading, isError} = props
+    let {dispatch, pageNumber, beers, isLoading, isError} = props
 
     useEffect(() => {
-        fetchBeersAction(dispatch, page)
-    },[page])
+        let didCancel = false
+        if (!didCancel) {
+            fetchBeersAction(dispatch, pageNumber)
+        }
+
+        return () => {
+            didCancel=true
+        }
+    },[pageNumber])
 
     return (
         <ul className='product-list'>
