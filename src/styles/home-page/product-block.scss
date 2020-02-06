@@ -1,6 +1,7 @@
 .product-list {
     @include ul-reset;
     margin-top: 30px;
+    margin-bottom: 30px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

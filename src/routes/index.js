@@ -7,6 +7,7 @@ import {
 
 import Layout from 'components/layout'
 import HomePage from 'components/home-page'
+import homePage from '../components/home-page'
 
 export default (
     <Switch>
@@ -20,10 +21,7 @@ export default (
                 <p>basket</p>
             </Layout>
         </Route>
-        <Route exact path = '/'>
-            <Redirect to = '/beers/1' />
-        </Route>
-        <Route path = '/beers/:page'>
+        <Route path = '/'>
             <Layout>
                 <HomePage />
             </Layout>

@@ -1,7 +1,7 @@
 import React, {
     useState, useEffect
 } from 'react'
-import { NavLink, useParams } from 'react-router-dom'
+import { NavLink, useParams, useRouteMatch } from 'react-router-dom'
 
 function generetePages (currentPage) {
     if(currentPage === 1) {
@@ -31,11 +31,11 @@ function onPaginationBtnClick (pagesNumbers, setPages, isNext = true) {
     setPages(newPagesNumbers)
 }
 
-function renderPages (pageNumbers, dispatch) {
+function renderPages (pageNumbers, dispatch, match) {
     return pageNumbers.map((elem) => {
         return (
             <li key = {elem}>
-                <NavLink to={'/beers/' + elem} className='pagination-list__item'
+                <NavLink to={`${match.url}/${elem}`} className='pagination-list__item'
                 activeClassName="pagination-list__item--active"
                 onClick = {() => {dispatch({type: 'SET_PAGE', payload: {page: elem}})}}
                 >
@@ -47,7 +47,7 @@ function renderPages (pageNumbers, dispatch) {
 }
 
 export default function Pagination (props) {
-    let {dispatch, pageNumber} = props
+    let {dispatch, pageNumber, match} = props
     let {page} = useParams()
     useEffect(() => {
         if(page !== toString(pageNumber)) {
@@ -57,12 +57,11 @@ export default function Pagination (props) {
 
     let pagesNumbers = generetePages(pageNumber)
     const [pages, setPages] = useState(pagesNumbers)
-
     return (
         <React.Fragment>
             <ul className='pagination-list'>
                 {renderScrollBtn(pages, setPages, false)}
-                {renderPages(pages,dispatch)}
+                {renderPages(pages,dispatch,match)}
                 {renderScrollBtn(pages, setPages, true)}
             </ul>
         </React.Fragment>

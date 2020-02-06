@@ -1,7 +1,7 @@
 import React, {
     useEffect
 } from 'react'
-import {Link, useParams} from 'react-router-dom'
+import {Link, Switch, Route, useParams} from 'react-router-dom'
 
 import {fetchBeersAction} from 'actions'
 
@@ -47,7 +47,7 @@ function generetListContent (beers, isLoading, isError) {
 
 export default function ProductBlock (props) {
 
-    let {dispatch, pageNumber, beers, isLoading, isError} = props
+    let {dispatch, pageNumber, beers, isLoading, isError, match} = props
 
     useEffect(() => {
         let didCancel = false
@@ -61,8 +61,13 @@ export default function ProductBlock (props) {
     },[pageNumber])
 
     return (
-        <ul className='product-list'>
-            {generetListContent(beers, isLoading, isError)}
-        </ul>
+        <Switch>
+            <Route path={`${match.path}/:page`}>
+                <ul className='product-list'>
+                    {generetListContent(beers, isLoading, isError)}
+                </ul>
+            </Route>
+        </Switch>
+        
     )
 }
