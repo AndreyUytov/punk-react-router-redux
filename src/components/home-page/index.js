@@ -1,6 +1,5 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import {NavLink, useRouteMatch} from 'react-router-dom'
 
 import Search from './search'
 import ProductBlock from './product-block'
@@ -8,12 +7,11 @@ import Pagination from './pagination'
 import {getBeers} from 'selectors'
 
 function HomePage (props) {
-    let match = useRouteMatch()
     return (
         <React.Fragment>
             <Search />
-            <ProductBlock {...props} match = {match}/>
-            <Pagination {...props} match = {match}/>
+            <ProductBlock {...props}/>
+            <Pagination {...props}/>
         </React.Fragment>
     )
 }

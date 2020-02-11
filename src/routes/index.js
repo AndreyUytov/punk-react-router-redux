@@ -6,8 +6,8 @@ import {
 } from 'react-router-dom'
 
 import Layout from 'components/layout'
-import HomePage from 'components/home-page'
-import homePage from '../components/home-page'
+import Catalog from 'components/catalog'
+
 
 export default (
     <Switch>
@@ -21,9 +21,9 @@ export default (
                 <p>basket</p>
             </Layout>
         </Route>
-        <Route path = '/'>
+        <Route path = '/catalog'>
             <Layout>
-                <HomePage />
+                <Catalog />
             </Layout>
         </Route>
     </Switch>
