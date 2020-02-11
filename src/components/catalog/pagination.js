@@ -1,7 +1,7 @@
 import React, {
     useState, useEffect
 } from 'react'
-import { NavLink, useParams, useRouteMatch } from 'react-router-dom'
+import { NavLink, useParams } from 'react-router-dom'
 
 function generetePages (currentPage) {
     if(currentPage === 1) {
@@ -31,13 +31,12 @@ function onPaginationBtnClick (pagesNumbers, setPages, isNext = true) {
     setPages(newPagesNumbers)
 }
 
-function renderPages (pageNumbers, dispatch, match) {
+function renderPages (pageNumbers, url) {
     return pageNumbers.map((elem) => {
         return (
             <li key = {elem}>
-                <NavLink to={`${match.url}/${elem}`} className='pagination-list__item'
+                <NavLink to={`${url}/${elem}`} className='pagination-list__item'
                 activeClassName="pagination-list__item--active"
-                onClick = {() => {dispatch({type: 'SET_PAGE', payload: {page: elem}})}}
                 >
                     {elem}  
                 </NavLink>
@@ -46,22 +45,19 @@ function renderPages (pageNumbers, dispatch, match) {
     })
 }
 
-export default function Pagination (props) {
-    let {dispatch, pageNumber} = props
-    let {page} = useParams()
+export default function Pagination ({url, page, pageNumber, dispatch}) {    
+    let pagesNumbers = generetePages(page)
+    const [pages, setPages] = useState(pagesNumbers)
     useEffect(() => {
-        if(page !== toString(pageNumber)) {
-            dispatch({type:'SET_PAGE', payload:{page: +page}})
+        if(toString(pageNumber) !== page) {
+            dispatch({type: 'SET_PAGE', payload: {page: +page}})
         }
     }, [page])
-
-    let pagesNumbers = generetePages(pageNumber)
-    const [pages, setPages] = useState(pagesNumbers)
     return (
         <React.Fragment>
             <ul className='pagination-list'>
                 {renderScrollBtn(pages, setPages, false)}
-                {renderPages(pages,dispatch,match)}
+                {renderPages(pages, url)}
                 {renderScrollBtn(pages, setPages, true)}
             </ul>
         </React.Fragment>

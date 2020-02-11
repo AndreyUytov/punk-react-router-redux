@@ -1,10 +1,23 @@
-import React from 'react'
-import {Link, Switch, Route, useParams, Redirect} from 'react-router-dom'
+import React, { useEffect } from 'react'
+import {Link, Switch, Route, useParams, useRouteMatch, Redirect} from 'react-router-dom'
+import { connect } from 'react-redux'
 
+import {getBeers} from 'selectors'
 import Pagination from './pagination'
+import {fetchBeersAction} from 'actions'
 
 
-function Items ({beers}) {
+function Items ({beers, dispatch, page}) {
+    useEffect(() => {
+        let didCancel = false
+        if (!didCancel) {
+            fetchBeersAction(dispatch, page)
+        }
+
+        return () => {
+            didCancel=true
+        }
+    },[page])
     return beers.map((elem) => {
         return (
             <li key = {elem.id} className='product-list__item item-card'>
@@ -32,21 +45,33 @@ function Items ({beers}) {
     })
 }
 
+
+
 function ListItems (props) {
     let { path, url } = useRouteMatch()
+    let { page } = useParams()
     return (
         <React.Fragment>
         <ul className='product-list'>
             <Switch>
                 <Route exact path={path}>
-                    <Redirect to = {`${url}/1`} />
+                    <Redirect to = {`${url}/${props.pageNumber}`} />
                 </Route>
                 <Route path={`${path}/:page`}>
-                    <ItemsByPage />
+                    <Items {...props} page = {page} />
                 </Route>
             </Switch>
         </ul>
-        <Pagination />
+        <Pagination url = {url} page = {page} {...props} />
         </React.Fragment>
     )
 }
+
+const mapStateToProps = (store) => {
+    return {
+        pageNumber: store.page,
+        beers: getBeers(store, store.page)
+    } 
+ }
+
+ export default connect (mapStateToProps)(ListItems)

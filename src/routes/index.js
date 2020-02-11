@@ -2,7 +2,8 @@ import React from 'react'
 import {
     Switch,
     Route,
-    Redirect
+    Redirect,
+    NavLink
 } from 'react-router-dom'
 
 import Layout from 'components/layout'
@@ -24,6 +25,11 @@ export default (
         <Route path = '/catalog'>
             <Layout>
                 <Catalog />
+            </Layout>
+        </Route>
+        <Route path = '/'>
+            <Layout>
+                <NavLink to = '/catalog'>Catalog</NavLink>
             </Layout>
         </Route>
     </Switch>
