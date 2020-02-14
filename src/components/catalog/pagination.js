@@ -45,7 +45,11 @@ function renderPages (pageNumbers, url) {
     })
 }
 
-export default function Pagination ({url, page, pageNumber, dispatch}) {    
+export default function Pagination ({url, pageNumber, dispatch}) { 
+    
+    let { page } = useParams()
+    console.log(page, 'from pagination', typeof page === 'number')
+    
     let pagesNumbers = generetePages(page)
     const [pages, setPages] = useState(pagesNumbers)
     useEffect(() => {

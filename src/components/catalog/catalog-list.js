@@ -7,7 +7,9 @@ import Pagination from './pagination'
 import {fetchBeersAction} from 'actions'
 
 
-function Items ({beers, dispatch, page}) {
+function Items ({beers, dispatch}) {
+    let { page } = useParams()
+    console.log(page, 'from list item', typeof page === 'number')
     useEffect(() => {
         let didCancel = false
         if (!didCancel) {
@@ -49,7 +51,7 @@ function Items ({beers, dispatch, page}) {
 
 function ListItems (props) {
     let { path, url } = useRouteMatch()
-    let { page } = useParams()
+    
     return (
         <React.Fragment>
         <ul className='product-list'>
@@ -58,11 +60,11 @@ function ListItems (props) {
                     <Redirect to = {`${url}/${props.pageNumber}`} />
                 </Route>
                 <Route path={`${path}/:page`}>
-                    <Items {...props} page = {page} />
+                    <Items {...props} />
                 </Route>
             </Switch>
         </ul>
-        <Pagination url = {url} page = {page} {...props} />
+        <Pagination url = {url} {...props} />
         </React.Fragment>
     )
 }

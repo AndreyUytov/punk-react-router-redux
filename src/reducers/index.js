@@ -31,11 +31,7 @@ function beers (state = {}, {type, payload}) {
 }
 
 const initialState = {
-    1: {
-        beers:[],
-        isLoading: true,
-        isError: false
-    }
+    1: []
 }
 
 function beersByPage (state = initialState, {type, payload}) {
@@ -43,17 +39,15 @@ function beersByPage (state = initialState, {type, payload}) {
         case SET_PAGE:
         case FETCH_BEERS_INIT:
             return {...state,
-                [payload.page] : {sLoading: true, isError: false, beers: []}
+                [payload.page] : []
             }
         case FETCH_BEERS_SUCCESS:
             return {...state,
-                [payload.page] : {
-                    beers: [...payload.beers.map(i => i.id)], 
-                    isLoading: false, isError: false}
+                [payload.page] : [...payload.beers.map(i => i.id)]
             }
         case FETCH_BEERS_FAILURE:
             return {...state,
-            [payload.page] : {isLoading: false, isError: payload.error}
+            [payload.page] : { isError: payload.error }
             }
         default: 
             return state
